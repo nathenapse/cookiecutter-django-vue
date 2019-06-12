@@ -21,7 +21,7 @@
     {% if cookiecutter.analytics == "Google Analytics" %}"vue-analytics": "^5.16.0",{% endif %}
     {% if cookiecutter.analytics == "Yandex Metrika" %}{% endif %}
     "vuex": "^3.0.1",
-    "vue-avatar": "^2.1.6",
+    "vue-avatar": "^2.1.6"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.1",
