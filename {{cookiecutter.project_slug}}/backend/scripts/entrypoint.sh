@@ -12,10 +12,7 @@ import environ
 
 try:
     env = environ.Env()
-    dbname = env.str('POSTGRES_DB')
-    user = env.str('POSTGRES_USER')
-    password = env.str('POSTGRES_PASSWORD')
-    conn = psycopg2.connect(dbname=dbname, user=user, password=password, host='postgres', port=5432)
+    conn = psycopg2.connect(env.db())
 except psycopg2.OperationalError:
     sys.exit(-1)
 sys.exit(0)
