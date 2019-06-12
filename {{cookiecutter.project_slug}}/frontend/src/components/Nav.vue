@@ -7,7 +7,7 @@
     <div class="container">
       <div class="navbar-brand">
         <router-link class="navbar-item" to="/">
-          <img src="../assets/logo.png" width="112" height="28" />
+          <img src="../assets/images/logo.png" width="112" height="28" />
         </router-link>
 
         <a
