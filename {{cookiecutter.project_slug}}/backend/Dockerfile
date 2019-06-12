@@ -11,10 +11,10 @@ ENV PYTHONFAULTHANDLER=1 \
 # python dependencies
 # COPY ./requirements.txt /
 COPY ./Pipfile /
-COPY ./Pipfile.lock /
 # RUN pip install -r ./requirements.txt
 RUN pip install pipenv
 
+RUN pipenv lock
 RUN pipenv install --system --deploy
 
 # upload scripts
