@@ -28,7 +28,7 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
-    {% if cookiecutter.api == 'REST' %}
+    { % if cookiecutter.api == 'REST' % }
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
@@ -36,9 +36,9 @@ THIRD_PARTY_APPS = [
     'allauth.account',
     'rest_auth.registration',
     'corsheaders',
-    {% elif cookiecutter.api == 'GraphQL' %}
+    { % elif cookiecutter.api == 'GraphQL' % }
     'graphene_django',
-    {% endif %}
+    { % endif % }
     'django_extensions',
 ]
 
@@ -57,7 +57,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    {% if cookiecutter.api == 'GraphQL' %}'graphql_jwt.middleware.JSONWebTokenMiddleware', {% endif %}
+    { % if cookiecutter.api == 'GraphQL' % }'graphql_jwt.middleware.JSONWebTokenMiddleware', { % endif % }
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -92,7 +92,14 @@ MANAGERS = ADMINS
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
-    'default': env.db(),
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': env.str('POSTGRES_DB'),
+        'USER': env.str('POSTGRES_USER'),
+        'PASSWORD': env.str('POSTGRES_PASSWORD'),
+        'HOST': 'postgres',
+        'PORT': 5432,
+    },
 }
 
 # GENERAL CONFIGURATION
@@ -201,7 +208,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # AUTHENTICATION CONFIGURATION
 # ------------------------------------------------------------------------------
 AUTHENTICATION_BACKENDS = [
-    {% if cookiecutter.api == 'GraphQL' %}'graphql_jwt.backends.JSONWebTokenBackend', {% endif %}
+    { % if cookiecutter.api == 'GraphQL' % }'graphql_jwt.backends.JSONWebTokenBackend', { % endif % }
     'django.contrib.auth.backends.ModelBackend',
 ]
 
@@ -210,7 +217,7 @@ AUTHENTICATION_BACKENDS = [
 AUTH_USER_MODEL = 'users.User'
 
 
-{% if cookiecutter.api == 'REST' %}
+{ % if cookiecutter.api == 'REST' % }
 # DJANGO REST FRAMEWORK
 # ------------------------------------------------------------------------------
 REST_FRAMEWORK = {
@@ -230,11 +237,11 @@ REST_FRAMEWORK = {
 
 REST_USE_JWT = True
 
-ACCOUNT_EMAIL_REQUIRED=True
-ACCOUNT_EMAIL_VERIFICATION=None
-ACCOUNT_UNIQUE_EMAIL=False
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = None
+ACCOUNT_UNIQUE_EMAIL = False
 
-{% elif cookiecutter.api == 'GraphQL' %}
+{ % elif cookiecutter.api == 'GraphQL' % }
 # Graphene
 GRAPHENE = {
     'SCHEMA': 'config.schema.schema',
@@ -248,10 +255,10 @@ GRAPHQL_JWT = {
     'JWT_AUTH_HEADER': 'authorization',
     'JWT_AUTH_HEADER_PREFIX': 'Bearer',
 }
-{% endif %}
+{ % endif % }
 
 
-{% if cookiecutter.use_sentry == 'y' %}
+{ % if cookiecutter.use_sentry == 'y' % }
 # raven sentry client
 # See https://docs.sentry.io/clients/python/integrations/django/
 INSTALLED_APPS += ['raven.contrib.django.raven_compat']
@@ -313,4 +320,4 @@ LOGGING = {
 RAVEN_CONFIG = {
     'DSN': SENTRY_DSN
 }
-{% endif %}
+{ % endif % }
