@@ -1,0 +1,66 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+autopep8 = "*"
+attrs = "*"
+backcall = "*"
+certifi = "*"
+chardet = "*"
+decorator = "*"
+django-environ = "*"
+django-extensions = "*"
+django-redis = "*"
+flake8 = "*"
+flake8-commas = "*"
+flake8-mypy = "*"
+gevent = "*"
+greenlet = "==0.4.14"
+gunicorn = "*"
+idna = "*"
+ipython = "*"
+jedi = "*"
+mccabe = "*"
+mypy = "*"
+parso = "*"
+pexpect = "*"
+pickleshare = "*"
+psycopg2-binary = "*"
+ptyprocess = "*"
+pycodestyle = "*"
+pyflakes = "*"
+pygments = "*"
+pytz = "*"
+redis = "*"
+requests = "*"
+rope = "*"
+simplegeneric = "*"
+six = "*"
+traitlets = "*"
+typed-ast = "*"
+urllib3 = "*"
+wcwidth = "*"
+werkzeug = "*"
+{% if cookiecutter.use_sentry == 'y' %}raven = "*"{% endif %}
+{% if cookiecutter.api == 'REST' %}
+djangorestframework = "*"
+django-rest-auth = "*"
+django-allauth = "*"
+djangorestframework-jwt = "*"
+{% elif cookiecutter.api == 'GraphQL' %}
+django-graphql-jwt==0.1.10
+graphene==2.1.3
+graphene-django==2.1.0
+{% endif %}
+Django = "*"
+ipython_genutils = "*"
+Pillow = "*"
+prompt_toolkit = "*"
+ipdb = "*"
+
+[requires]
+python_version = "3.6"

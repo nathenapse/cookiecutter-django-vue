@@ -1,20 +1,22 @@
 {
-    "======================== INFO =======================": " ",
-    "project_name": "Project Name",
-    "project_slug": "{{ cookiecutter.project_name.lower()|replace(' ', '_')|replace('-', '_') }}",
-    "domain": "{{ cookiecutter.project_slug }}.com",
-    "description": "Short description",
+  "======================== INFO =======================": " ",
+  "project_name": "Project Name",
+  "project_slug": "{{ cookiecutter.project_name.lower()|replace(' ', '_')|replace('-', '_') }}",
+  "domain": "{{ cookiecutter.project_slug }}.com",
+  "description": "Short description",
 
-    "author": "Your Name",
-    "email": "admin@{{ cookiecutter.domain }}",
+  "author": "Your Name",
+  "email": "admin@{{ cookiecutter.domain }}",
 
-    "====================== GENERAL ======================": " ",
-    "api": ["REST", "GraphQL"],
-    "backups": "y",
-    
-    "==================== INTEGRATIONS ===================": " ",
-    "use_sentry": "y",
-    "use_portainer": "y",
-    "use_mailhog": "y",
-    "analytics": ["Google Analytics", "Yandex Metrika", "None"]
+  "====================== GENERAL ======================": " ",
+  "api": ["REST", "GraphQL"],
+  "backups": "y",
+  "auth": ["email", "username"],
+  "phone": "y",
+
+  "==================== INTEGRATIONS ===================": " ",
+  "use_sentry": "y",
+  "use_portainer": "y",
+  "use_mailhog": "y",
+  "analytics": ["Google Analytics", "Yandex Metrika", "None"]
 }

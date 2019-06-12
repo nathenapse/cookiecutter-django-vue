@@ -2,7 +2,7 @@ from django.urls import path
 from django.contrib import admin
 from django.contrib.auth import logout
 {% if cookiecutter.api == 'REST' %}
-from django.conf.urls import include
+from django.conf.urls import include,  url
 
 from config.api import api
 {% elif cookiecutter.api == 'GraphQL' %}
@@ -18,7 +18,8 @@ urlpatterns = [
     path('logout/', logout, {'next_page': '/'}, name='logout'),
     {% if cookiecutter.api == 'REST' %}
     path('api/', include(api.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api_auth/', include('rest_auth.urls')),
+    url(r'^api_auth/registration/', include('rest_auth.registration.urls'))
     {% elif cookiecutter.api == 'GraphQL' %}
     path('graphql', csrf_exempt(GraphQLView.as_view(graphiql=settings.DEBUG))),
     {% endif %}

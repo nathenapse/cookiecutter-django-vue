@@ -15,6 +15,12 @@ import { createProvider } from '@/apollo'
 {% if cookiecutter.use_sentry == 'y' %}import VueRaven from 'vue-raven'{% endif %}
 
 import App from '@/App.vue'
+import router from "@/resources/router";
+import store from "@/resources/store";
+import "@/resources/buefy";
+import "@/resources/slider";
+import http from "@/resources/http";
+import { i18n } from "@/resources/i18n";
 import './registerServiceWorker'
 
 Vue.config.productionTip = false
@@ -46,6 +52,25 @@ Vue.use(VueYandexMetrika, {
 new Vue({
   router,
   store,
+  i18n,
   {% if cookiecutter.api == "GraphQL" %}provide: createProvider().provide(),{% endif %}
-  render: h => h(App)
+  render: h => h(App),
+  created() {
+    var vm = this;
+    http.interceptors.response.use(undefined, function(err) {
+      return new Promise(function() {
+        if (
+          err.response.status === 401 &&
+          err.config &&
+          !err.config.__isRetryRequest
+        ) {
+          // if you ever get an unauthorized, logout the user
+          vm.$store.dispatch("LOGOUT");
+          vm.$router.push({ name: "login" });
+        } else {
+          throw err;
+        }
+      });
+    });
+  }
 }).$mount('#app')
